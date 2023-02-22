@@ -1,8 +1,4 @@
-﻿  Source.cpp
-  stb_image.cpp
-  Game.cpp
-  GraphicsEngine.cpp
-  ShaderProgram.cpp
+﻿  GraphicsEngine.cpp
   VertexArrayObject.cpp
 C:\Users\makem\Documents\GitHub\VMEngine2\VMEngine\source\VMEngine\Graphics\VertexArrayObject.cpp(120,11): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   Generating Code...
