@@ -71,6 +71,25 @@ const IndicesMatrix CircleIndices
 	0, 8, 1		//Triangle 8
 };
 
+const PositionMatrix ArrowPositions
+{
+	// x	//y		//z		//Colour
+	-0.5f,	-0.5f,	0.0f,	1.0f, 1.0f, 0.0f,	//bottom left - index 0
+	 0.5f,	-0.5f,	0.0f,	1.0f, 1.0f, 0.0f,	//bottom right - index 1
+	 0.5f,	 0.5f,	0.0f,	1.0f, 1.0f, 0.0f,	//top right - index 2
+	-0.5f,	 0.5f,  0.0f,   1.0f, 1.0f, 0.0f,	//top left - index 3
+	 0.0f,   1.0f,  0.0f,   0.0f, 0.0f, 1.0f,   //top up - index 4
+	 0.0f,	-1.0f,  0.0f,   0.0f, 1.0f, 0.0f,	//bottom down - index 5
+	 1.0f,	 0.0f,	0.0f,	1.0f, 0.0f, 0.f		//right - index 6
+};
+
+const IndicesMatrix ArrowIndices
+{
+	0, 3, 1,	//Triangle 1
+	3, 2, 1,	//Triangle 2
+	4, 5, 6		//Triangle 3
+};
+
 class VertexArrayObject
 {
 public:

@@ -36,7 +36,8 @@ enum class GeometricShapes
 {
 	Triangle = 0,
 	Polygon,
-	Circle
+	Circle,
+	Arrow
 };
 
 //store the paramater required to create a shader as a

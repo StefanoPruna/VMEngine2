@@ -24,6 +24,10 @@ VertexArrayObject::VertexArrayObject(GeometricShapes ChosenShape)
 		ChosenPositions = CirclePositions;
 		ChosenIndices = CircleIndices;
 		break;
+	case GeometricShapes::Arrow :
+		ChosenPositions = ArrowPositions;
+		ChosenIndices = ArrowIndices;
+		break;
 	default :
 		break;
 	}
@@ -38,6 +42,7 @@ VertexArrayObject::VertexArrayObject(GeometricShapes ChosenShape)
 
 	Shape.PositionMatrix = CirclePositions;
 	Shape.IndecesMatrix = CircleIndices;*/
+	
 	Shape.PositionMatrix = ChosenPositions;
 	Shape.IndecesMatrix = ChosenIndices;
 

@@ -120,21 +120,22 @@ void GraphicsEngine::Draw()
 		//move the object
 		glm::mat4 transform = glm::mat4(1.0f);
 
-		if (index == 0)//Square
+		if (index == 0)//Triangle
 		{
 			//move in the x, y or z direction based on the amount added
 			transform = glm::translate(transform, glm::vec3(-0.5f, 0.0, 0.0f));
 			//radians is rotation amount
 			//vec3 is the direction to rotate in
 			transform = glm::rotate(transform, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			transform = glm::scale(transform, glm::vec3(0.5f, 0.5f, 1.0f));
+			transform = glm::scale(transform, glm::vec3(0.75f, 0.75f, 1.0f));
 		}		
-		else if (index == 1)//Triangle
+		else if (index == 1)//Square
 		{
 			transform = glm::translate(transform, glm::vec3(0.5f, 0.0, 0.0f));
 			//x and y will work for our 2D shapes
 			//z must be larger than 0 to see the object
-			transform = glm::scale(transform, glm::vec3(0.75f, 0.75f, 1.0f));
+			transform = glm::rotate(transform, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+			transform = glm::scale(transform, glm::vec3(0.5f, 0.5f, 1.0f));
 		}
 		else if(index == 2) //Circle
 		{
@@ -144,6 +145,14 @@ void GraphicsEngine::Draw()
 			//vec3 is the direction to rotate in
 			transform = glm::rotate(transform, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 			transform = glm::scale(transform, glm::vec3(0.5f, 0.5f, 1.0f));
+		}
+		else if (index == 3)//Arrow
+		{
+			transform = glm::translate(transform, glm::vec3(0.5f, 0.70, 0.0f));
+			//x and y will work for our 2D shapes
+			//z must be larger than 0 to see the object
+			transform = glm::rotate(transform, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+			transform = glm::scale(transform, glm::vec3(0.25f, 0.25f, 1.0f));
 		}
 
 		Shader->SetMat4("transform", transform);
