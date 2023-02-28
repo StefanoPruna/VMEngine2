@@ -1,6 +1,4 @@
-﻿  Source.cpp
-  Game.cpp
-  Generating Code...
+﻿  GraphicsEngine.cpp
   VMEngine.vcxproj -> C:\Users\makem\Documents\GitHub\VMEngine2\x64\Debug\VMEngine.exe
   C:\Users\makem\Documents\GitHub\VMEngine2\\VMEngine\lib\glew32.dll
   C:\Users\makem\Documents\GitHub\VMEngine2\\VMEngine\lib\SDL2.dll

@@ -1,7 +1,6 @@
 #include "VMEngine/Graphics/GraphicsEngine.h"
 #include "GLEW/glew.h"
 #include "VMEngine/Graphics/VertexArrayObject.h"
-#include "VMEngine/CoreMinimal.h"
 #include "VMEngine/Graphics/ShaderProgram.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -11,11 +10,12 @@ GraphicsEngine::GraphicsEngine()
 {
 	SdlWindow = nullptr;
 	SdlGLContext = NULL;
+	bWireFrameMode = false;
 }
 
 GraphicsEngine::~GraphicsEngine()
 {
-	//clear from the memory
+	//remove textures from the memory
 	TextureStack.clear();
 
 	//Delete the SDL window from memory
@@ -208,20 +208,21 @@ TexturePtr GraphicsEngine::CreateTexture(const char* FilePath)
 			cout << "Texture found! Assigning current texture" << endl;
 			break;
 		}
+	}
 
-		//if there isn't texture already in existance
-		if (NewTexture == nullptr)
+	//if there isn't texture already in existance
+	if (NewTexture == nullptr)
+	{
+		cout << "Creating a new texture" << endl;
+
+		NewTexture = make_shared<Texture>();
+
+		if (NewTexture->CreateTextureFromFilePath(FilePath))
 		{
-			cout << "Creating a new texture" << endl;
-			NewTexture = make_shared<Texture>();
+			cout << "Texture " << NewTexture->GetID() << " creation success" << endl;
 
-			if (NewTexture->CreateTextureFromFilePath(FilePath))
-			{
-				cout << "Texture " << NewTexture->GetID() << "creation success" << endl;
-
-				//add the texture to the texture stack
-				TextureStack.push_back(NewTexture);
-			}				
+			//add the texture to the texture stack
+			TextureStack.push_back(NewTexture);
 		}
 	}
 

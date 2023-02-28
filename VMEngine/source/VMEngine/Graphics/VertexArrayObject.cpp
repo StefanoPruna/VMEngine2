@@ -98,33 +98,19 @@ VertexArrayObject::VertexArrayObject(GeometricShapes ChosenShape)
 	//enable the colour array
 	glEnableVertexAttribArray(1);
 
-	//Clear the buffer
-	glBindVertexArray(0);
-
+	//Assign the texture coordinates to the shader
 	glVertexAttribPointer(
-		0,					//data set - 0 = the first data set in the array
-		3,					//How many vertices/numbers in our matrix we need to make a triangle
-		GL_FLOAT, GL_FALSE, //data type, whether we normalise the values
-		sizeof(float) * 8,  //stride - the length it takes to get to each number
-		(void*)0			//override to 0, the offset of how many number to skip in the matrix
-	);
-
-	// enable the vertex array
-	glEnableVertexAttribArray(2);
-
-	//Assign the colour to the shader
-	glVertexAttribPointer(
-		1,
-		3,
+		2,
+		2,
 		GL_FLOAT, GL_FALSE,
 		sizeof(float) * 8,
-		(void*)(6 * sizeof(float)) //skips the first 3 numbers from the matrix
+		(void*)(6 * sizeof(float)) //skips the first 6 numbers from the matrix
 	);
 
-	//enable the colour array
-	glEnableVertexAttribArray(3);
+	//enable the texture coordinate array
+	glEnableVertexAttribArray(2);
 
-	//Clear the buffer
+	//clear the buffer
 	glBindVertexArray(0);
 }
 

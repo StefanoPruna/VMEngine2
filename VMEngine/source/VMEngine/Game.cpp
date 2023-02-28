@@ -1,8 +1,5 @@
 #include "VMEngine/Game.h"
 #include "VMEngine/Graphics/GraphicsEngine.h"
-#include "VMEngine/Graphics/ShaderProgram.h"
-#include "VMEngine/Graphics/Texture.h"
-
 
 Game& Game::GetGameInstance()
 {
@@ -36,7 +33,6 @@ Game::Game()
 
 	Graphics = nullptr;
 	bIsGameOver = false;
-	//DefaultTexture = nullptr;
 }
 
 Game::~Game()
@@ -56,11 +52,6 @@ void Game::Run()
 			L"Game/Shaders/TextureShader/TextureShader.svert",
 			L"Game/Shaders/TextureShader/TextureShader.sfrag"
 			});
-
-		/*DefaultTexture = make_shared<Texture>();
-
-		if (!DefaultTexture->CreateTextureFromFilePath("Game/Textures/brick_pavement.jpg"))
-			DefaultTexture = nullptr;*/
 
 		Graphics->CreateTexture("Game/Textures/brick_pavement.jpg");
 
