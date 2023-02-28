@@ -36,4 +36,7 @@ private:
 	bool bIsGameOver;
 
 	GraphicsEnginePtr Graphics;
+
+	//Load a default texture
+	/*TexturePtr DefaultTexture;*/
 };

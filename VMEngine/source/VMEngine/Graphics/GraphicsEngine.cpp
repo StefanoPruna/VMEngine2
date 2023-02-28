@@ -5,6 +5,7 @@
 #include "VMEngine/Graphics/ShaderProgram.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "VMEngine/Graphics/Texture.h"
 
 GraphicsEngine::GraphicsEngine()
 {
@@ -14,6 +15,9 @@ GraphicsEngine::GraphicsEngine()
 
 GraphicsEngine::~GraphicsEngine()
 {
+	//clear from the memory
+	TextureStack.clear();
+
 	//Delete the SDL window from memory
 	SDL_DestroyWindow(SdlWindow);
 	//destroy the GL 
@@ -188,6 +192,40 @@ void GraphicsEngine::CreateShader(VFShaderParams ShaderFilePaths)
 	NewShader->InitVFShader(ShaderFilePaths);
 
 	Shader = NewShader;
+}
+
+TexturePtr GraphicsEngine::CreateTexture(const char* FilePath)
+{
+	TexturePtr NewTexture = nullptr;
+
+	// run through all the textures and check if one with the same path exists
+	for (TexturePtr TestTexture : TextureStack)
+	{
+		if (TestTexture->GetFilePath() == FilePath)
+		{
+			//pass in the already created texture
+			NewTexture = TestTexture;
+			cout << "Texture found! Assigning current texture" << endl;
+			break;
+		}
+
+		//if there isn't texture already in existance
+		if (NewTexture == nullptr)
+		{
+			cout << "Creating a new texture" << endl;
+			NewTexture = make_shared<Texture>();
+
+			if (NewTexture->CreateTextureFromFilePath(FilePath))
+			{
+				cout << "Texture " << NewTexture->GetID() << "creation success" << endl;
+
+				//add the texture to the texture stack
+				TextureStack.push_back(NewTexture);
+			}				
+		}
+	}
+
+	return NewTexture;
 }
 
 void GraphicsEngine::HandleWireFrameMode(bool bShowWireFrameMode)

@@ -27,6 +27,10 @@ public:
 
 	void CreateShader(VFShaderParams ShaderFilePahts);
 
+	//create a texture and add it to the tyexture stack
+	//avoid duplicates
+	TexturePtr CreateTexture(const char* FilePath);
+
 private:
 	SDL_Window* SdlWindow;
 	SDL_GLContext SdlGLContext;
@@ -39,4 +43,6 @@ private:
 
 	//single shader
 	ShaderPtr Shader;
+	//store a vector of textures
+	TexturePtrStack TextureStack;
 };

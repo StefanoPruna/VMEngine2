@@ -1,4 +1,8 @@
 #include "VMEngine/Game.h"
+#include "VMEngine/Graphics/GraphicsEngine.h"
+#include "VMEngine/Graphics/ShaderProgram.h"
+#include "VMEngine/Graphics/Texture.h"
+
 
 Game& Game::GetGameInstance()
 {
@@ -31,8 +35,8 @@ Game::Game()
 	cout << "Game Initialised" << "\n";
 
 	Graphics = nullptr;
-
 	bIsGameOver = false;
+	//DefaultTexture = nullptr;
 }
 
 Game::~Game()
@@ -47,9 +51,19 @@ void Game::Run()
 	if (!bIsGameOver)
 	{
 		Graphics->CreateShader({
-			L"Game/Shaders/SimpleShader/SimpleShader.svert",
-			L"Game/Shaders/SimpleShader/SimpleShader.sfrag"
+			/*L"Game/Shaders/VertexShader/VertexShader.svert",
+			L"Game/Shaders/VertexShader/VertexShader.sfrag"*/
+			L"Game/Shaders/TextureShader/TextureShader.svert",
+			L"Game/Shaders/TextureShader/TextureShader.sfrag"
 			});
+
+		/*DefaultTexture = make_shared<Texture>();
+
+		if (!DefaultTexture->CreateTextureFromFilePath("Game/Textures/brick_pavement.jpg"))
+			DefaultTexture = nullptr;*/
+
+		Graphics->CreateTexture("Game/Textures/brick_pavement.jpg");
+
 		//Create the vertex
 		Graphics->CreateVAO(GeometricShapes::Triangle);
 		Graphics->CreateVAO(GeometricShapes::Polygon);
