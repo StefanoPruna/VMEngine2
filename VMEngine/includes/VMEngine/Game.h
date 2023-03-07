@@ -14,6 +14,10 @@ public:
 
 	void Start(const char* WTitle, bool bFullscreen, int WWidth, int WHeight);
 
+	double GetDeltaTime() { return DeltaTime; }
+
+	float GetFDeltaTime() { return static_cast<float>(DeltaTime); }
+
 private:
 	Game();
 	~Game();
@@ -37,6 +41,17 @@ private:
 
 	GraphicsEnginePtr Graphics;
 
+<<<<<<< Updated upstream
 	//Load a default texture
 	/*TexturePtr DefaultTexture;*/
+=======
+	//time between frames, double is more precised than float
+	double DeltaTime;
+
+	//temp mesh variables
+	MeshPtr Tri;
+	MeshPtr Poly;
+	MeshPtr Round;
+	MeshPtr Arrow;
+>>>>>>> Stashed changes
 };

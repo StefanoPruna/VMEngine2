@@ -23,9 +23,9 @@ public:
 	SDL_Window* GetWindow() const;
 
 	//Add a new VAO to the VAOStack using a shape
-	void CreateVAO(GeometricShapes Shape);
+	MeshPtr CreateSimpleMeshShape(GeometricShapes Shape, ShaderPtr MeshShader, TexturePtrStack MeshTextures);
 
-	void CreateShader(VFShaderParams ShaderFilePahts);
+	ShaderPtr CreateShader(VFShaderParams ShaderFilePahts);
 
 	//create a texture and add it to the tyexture stack
 	//avoid duplicates
@@ -33,9 +33,9 @@ public:
 
 private:
 	SDL_Window* SdlWindow;
+
 	SDL_GLContext SdlGLContext;
-	//Stack all the VAOs
-	VAOStack VAOs;
+	
 	//Handle wireframe mode
 	void HandleWireFrameMode(bool bShowWireFrameMode);
 	//set wireframe
@@ -45,4 +45,6 @@ private:
 	ShaderPtr Shader;
 	//store a vector of textures
 	TexturePtrStack TextureStack;
+
+	MeshPtrStack MeshStack;
 };

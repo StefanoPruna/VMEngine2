@@ -25,7 +25,7 @@ public:
 	void BindTexture();
 
 	//assigns the relevant data to the current loaded texture; turn the texture on
-	void ActivateTexture();
+	void ActivateTexture(vmuint Index);
 
 	//clear the texture in OpenGL
 	static void ResetTexture();

@@ -137,15 +137,18 @@
     <ClInclude Include="includes\VMEngine\CoreMinimal.h" />
     <ClInclude Include="includes\VMEngine\Game.h" />
     <ClInclude Include="includes\VMEngine\Graphics\GraphicsEngine.h" />
+    <ClInclude Include="includes\VMEngine\Graphics\Mesh.h" />
     <ClInclude Include="includes\VMEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="includes\VMEngine\Graphics\Texture.h" />
     <ClInclude Include="includes\VMEngine\Graphics\VertexArrayObject.h" />
+    <ClInclude Include="includes\VMEngine\Math\Transformations.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Source.cpp" />
     <ClCompile Include="source\stb_image\stb_image.cpp" />
     <ClCompile Include="source\VMEngine\Game.cpp" />
     <ClCompile Include="source\VMEngine\Graphics\GraphicsEngine.cpp" />
+    <ClCompile Include="source\VMEngine\Graphics\Mesh.cpp" />
     <ClCompile Include="source\VMEngine\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="source\VMEngine\Graphics\Texture.cpp" />
     <ClCompile Include="source\VMEngine\Graphics\VertexArrayObject.cpp" />

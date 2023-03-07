@@ -89,14 +89,14 @@ void Texture::BindTexture()
 		glBindTexture(GL_TEXTURE_2D, TextureID);
 }
 
-void Texture::ActivateTexture()
+void Texture::ActivateTexture(vmuint Index)
 {
 	if(TextureID != 0)
-		glActiveTexture(GL_TEXTURE0 + TextureID - 1);
+		glActiveTexture(GL_TEXTURE0 + Index);
 }
 
 void Texture::ResetTexture()
 {
-	//assign the first texture to anything without a texture
-	glActiveTexture(GL_TEXTURE0);
+		//assign the first texture to anything without a texture
+		glActiveTexture(GL_TEXTURE0);	
 }

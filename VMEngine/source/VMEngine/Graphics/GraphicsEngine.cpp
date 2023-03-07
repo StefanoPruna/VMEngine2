@@ -1,7 +1,11 @@
 #include "VMEngine/Graphics/GraphicsEngine.h"
 #include "GLEW/glew.h"
+<<<<<<< Updated upstream
 #include "VMEngine/Graphics/VertexArrayObject.h"
 #include "VMEngine/CoreMinimal.h"
+=======
+#include "VMEngine/Graphics/Mesh.h"
+>>>>>>> Stashed changes
 #include "VMEngine/Graphics/ShaderProgram.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -15,7 +19,13 @@ GraphicsEngine::GraphicsEngine()
 
 GraphicsEngine::~GraphicsEngine()
 {
+<<<<<<< Updated upstream
 	//clear from the memory
+=======
+	MeshStack.clear();
+	Shader = nullptr;
+	//remove textures from the memory
+>>>>>>> Stashed changes
 	TextureStack.clear();
 
 	//Delete the SDL window from memory
@@ -115,59 +125,11 @@ void GraphicsEngine::Draw()
 
 	HandleWireFrameMode(false);
 
-	vmuint index = 0;
-	//foreach loop
-	for (VAOPtr VAO : VAOs)
+	//run through each mesh and call its draw method
+	for (MeshPtr LMesh : MeshStack)
 	{
-		Shader->RunShader();
-
-		//move the object
-		glm::mat4 transform = glm::mat4(1.0f);
-
-		if (index == 0)//Triangle
-		{
-			//move in the x, y or z direction based on the amount added
-			transform = glm::translate(transform, glm::vec3(-0.5f, 0.0, 0.0f));
-			//radians is rotation amount
-			//vec3 is the direction to rotate in
-			transform = glm::rotate(transform, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			transform = glm::scale(transform, glm::vec3(0.75f, 0.75f, 1.0f));
-		}		
-		else if (index == 1)//Square
-		{
-			transform = glm::translate(transform, glm::vec3(0.5f, 0.0, 0.0f));
-			//x and y will work for our 2D shapes
-			//z must be larger than 0 to see the object
-			transform = glm::rotate(transform, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			transform = glm::scale(transform, glm::vec3(0.5f, 0.5f, 1.0f));
-		}
-		else if(index == 2) //Circle
-		{
-			//move in the x, y or z direction based on the amount added
-			transform = glm::translate(transform, glm::vec3(-0.25f, 0.5f, 0.0f));
-			//radians is rotation amount
-			//vec3 is the direction to rotate in
-			transform = glm::rotate(transform, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			transform = glm::scale(transform, glm::vec3(0.5f, 0.5f, 1.0f));
-		}
-		else if (index == 3)//Arrow
-		{
-			transform = glm::translate(transform, glm::vec3(0.5f, 0.70, 0.0f));
-			//x and y will work for our 2D shapes
-			//z must be larger than 0 to see the object
-			transform = glm::rotate(transform, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			transform = glm::scale(transform, glm::vec3(0.25f, 0.25f, 1.0f));
-		}
-
-		Shader->SetMat4("transform", transform);
-
-		//Draw each VAO
-		VAO->Draw();
-
-		index++;
+		LMesh->Draw();
 	}
-
-	index = 0;
 
 	PresentGraphics();
 }
@@ -177,21 +139,32 @@ SDL_Window* GraphicsEngine::GetWindow() const
 	return SdlWindow;
 }
 
-void GraphicsEngine::CreateVAO(GeometricShapes Shape)
+MeshPtr GraphicsEngine::CreateSimpleMeshShape(GeometricShapes Shape, ShaderPtr MeshShader, TexturePtrStack MeshTextures)
 {
-	//Create a new VAO as a shared pointer
-	VAOPtr NewVAO = make_shared<VAO>(Shape);
-	//Assign value/object to the stack
-	VAOs.push_back(NewVAO);
+	//Initialise a new mesh class
+	MeshPtr NewMesh = make_shared<Mesh>();
+
+	//make sure that it works
+	if (!NewMesh->CreateSimpleShape(Shape, MeshShader, MeshTextures))
+		return nullptr;
+
+	//add mesh into the stack of meshes to be rendered
+	MeshStack.push_back(NewMesh);
+
+	//return the new mesh
+	return NewMesh;
 }
 
-void GraphicsEngine::CreateShader(VFShaderParams ShaderFilePaths)
+ShaderPtr GraphicsEngine::CreateShader(VFShaderParams ShaderFilePaths)
 {
 	ShaderPtr NewShader = make_shared<ShaderProgram>();
 
 	NewShader->InitVFShader(ShaderFilePaths);
 
+	//add the shader to our graphics engine
 	Shader = NewShader;
+
+	return NewShader;
 }
 
 TexturePtr GraphicsEngine::CreateTexture(const char* FilePath)
