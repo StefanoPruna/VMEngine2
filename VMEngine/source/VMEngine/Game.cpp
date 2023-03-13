@@ -1,12 +1,8 @@
 #include "VMEngine/Game.h"
 #include "VMEngine/Graphics/GraphicsEngine.h"
-<<<<<<< Updated upstream
 #include "VMEngine/Graphics/ShaderProgram.h"
 #include "VMEngine/Graphics/Texture.h"
-
-=======
 #include "VMEngine/Graphics/Mesh.h"
->>>>>>> Stashed changes
 
 Game& Game::GetGameInstance()
 {
@@ -61,19 +57,16 @@ void Game::Run()
 			L"Game/Shaders/TextureShader/TextureShader.sfrag"
 			});
 
-<<<<<<< Updated upstream
 		/*DefaultTexture = make_shared<Texture>();
 
 		if (!DefaultTexture->CreateTextureFromFilePath("Game/Textures/brick_pavement.jpg"))
 			DefaultTexture = nullptr;*/
 
 		Graphics->CreateTexture("Game/Textures/brick_pavement.jpg");
-=======
 		TexturePtr TConcrete = Graphics->CreateTexture("Game/Textures/brick_pavement.jpg");
 		TexturePtr TGrid = Graphics->CreateTexture("Game/Textures/RectStones.jpg");
 		TexturePtr TStones = Graphics->CreateTexture("Game/Textures/SquareStones.jpg");
 		TexturePtr TBricks = Graphics->CreateTexture("Game/Textures/SquareBrown.jpg");
->>>>>>> Stashed changes
 
 		//Create the vertex
 		Poly = Graphics->CreateSimpleMeshShape(GeometricShapes::Polygon, TextureShader, { TConcrete });

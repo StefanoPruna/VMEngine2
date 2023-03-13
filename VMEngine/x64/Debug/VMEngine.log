@@ -1,13 +1,16 @@
-<<<<<<< Updated upstream
 ﻿  Source.cpp
+  stb_image.cpp
   Game.cpp
+C:\Users\makem\Documents\GitHub\VMEngine2\VMEngine\source\VMEngine\Game.cpp(129,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\makem\Documents\GitHub\VMEngine2\VMEngine\source\VMEngine\Game.cpp(132,13): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\makem\Documents\GitHub\VMEngine2\VMEngine\source\VMEngine\Game.cpp(135,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  GraphicsEngine.cpp
+  Mesh.cpp
+  ShaderProgram.cpp
+  Texture.cpp
+  VertexArrayObject.cpp
+C:\Users\makem\Documents\GitHub\VMEngine2\VMEngine\source\VMEngine\Graphics\VertexArrayObject.cpp(151,11): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   Generating Code...
-=======
-﻿  Game.cpp
-C:\Users\makem\Documents\GitHub\VMEngine2\VMEngine\source\VMEngine\Game.cpp(120,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\makem\Documents\GitHub\VMEngine2\VMEngine\source\VMEngine\Game.cpp(123,13): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\makem\Documents\GitHub\VMEngine2\VMEngine\source\VMEngine\Game.cpp(126,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
->>>>>>> Stashed changes
   VMEngine.vcxproj -> C:\Users\makem\Documents\GitHub\VMEngine2\x64\Debug\VMEngine.exe
   C:\Users\makem\Documents\GitHub\VMEngine2\\VMEngine\lib\glew32.dll
   C:\Users\makem\Documents\GitHub\VMEngine2\\VMEngine\lib\SDL2.dll

@@ -41,10 +41,9 @@ private:
 
 	GraphicsEnginePtr Graphics;
 
-<<<<<<< Updated upstream
 	//Load a default texture
 	/*TexturePtr DefaultTexture;*/
-=======
+
 	//time between frames, double is more precised than float
 	double DeltaTime;
 
@@ -53,5 +52,4 @@ private:
 	MeshPtr Poly;
 	MeshPtr Round;
 	MeshPtr Arrow;
->>>>>>> Stashed changes
 };

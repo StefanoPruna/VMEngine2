@@ -1,11 +1,8 @@
 #include "VMEngine/Graphics/GraphicsEngine.h"
 #include "GLEW/glew.h"
-<<<<<<< Updated upstream
 #include "VMEngine/Graphics/VertexArrayObject.h"
 #include "VMEngine/CoreMinimal.h"
-=======
 #include "VMEngine/Graphics/Mesh.h"
->>>>>>> Stashed changes
 #include "VMEngine/Graphics/ShaderProgram.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -19,13 +16,10 @@ GraphicsEngine::GraphicsEngine()
 
 GraphicsEngine::~GraphicsEngine()
 {
-<<<<<<< Updated upstream
 	//clear from the memory
-=======
 	MeshStack.clear();
 	Shader = nullptr;
 	//remove textures from the memory
->>>>>>> Stashed changes
 	TextureStack.clear();
 
 	//Delete the SDL window from memory
