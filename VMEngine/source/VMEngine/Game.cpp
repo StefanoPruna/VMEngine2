@@ -32,11 +32,10 @@ void Game::Start(const char* WTitle, bool bFullscreen, int WWidth, int WHeight)
 
 Game::Game()
 {
-	cout << "Game Initialised" << "\n";
+	cout << "Game Initialised" << endl;
 
 	Graphics = nullptr;
 	bIsGameOver = false;
-	//DefaultTexture = nullptr;
 }
 
 Game::~Game()
@@ -50,19 +49,14 @@ void Game::Run()
 {
 	if (!bIsGameOver)
 	{
+		//create a shader
 		ShaderPtr TextureShader = Graphics->CreateShader({
-			/*L"Game/Shaders/VertexShader/VertexShader.svert",
-			L"Game/Shaders/VertexShader/VertexShader.sfrag"*/
 			L"Game/Shaders/TextureShader/TextureShader.svert",
 			L"Game/Shaders/TextureShader/TextureShader.sfrag"
 			});
 
-		/*DefaultTexture = make_shared<Texture>();
-
-		if (!DefaultTexture->CreateTextureFromFilePath("Game/Textures/brick_pavement.jpg"))
-			DefaultTexture = nullptr;*/
-
 		Graphics->CreateTexture("Game/Textures/brick_pavement.jpg");
+
 		TexturePtr TConcrete = Graphics->CreateTexture("Game/Textures/brick_pavement.jpg");
 		TexturePtr TGrid = Graphics->CreateTexture("Game/Textures/RectStones.jpg");
 		TexturePtr TStones = Graphics->CreateTexture("Game/Textures/SquareStones.jpg");
@@ -131,7 +125,7 @@ void Game::Update()
 	if (Tri->Transform.Location.y > 0.5f)
 		MoveUp = -1.0f;
 
-	else if (Tri->Transform.Location.y < -0.5f)
+	if (Tri->Transform.Location.y < -0.5f)
 		MoveUp = 1.0f;
 
 	Tri->Transform.Location.y += (0.9f * MoveUp) * GetFDeltaTime();

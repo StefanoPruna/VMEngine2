@@ -12,6 +12,7 @@ GraphicsEngine::GraphicsEngine()
 {
 	SdlWindow = nullptr;
 	SdlGLContext = NULL;
+	bWireFrameMode = false;
 }
 
 GraphicsEngine::~GraphicsEngine()
@@ -71,7 +72,7 @@ bool GraphicsEngine::InitGE(const char* WTitle, bool bFullscreen, int WWidth, in
 
 	if (SdlWindow == nullptr)
 	{
-		cout << "SDL window failed: " << SDL_GetError() << "\n";
+		cout << "SDL window failed: " << SDL_GetError() << endl;
 		return false;
 	}
 
@@ -91,7 +92,7 @@ bool GraphicsEngine::InitGE(const char* WTitle, bool bFullscreen, int WWidth, in
 
 	if (InitGLEW != GLEW_OK)
 	{
-		cout << "GLEW failed: " << glewGetErrorString(InitGLEW) << "\n";
+		cout << "GLEW failed: " << glewGetErrorString(InitGLEW) << endl;
 		return false;
 	}
 

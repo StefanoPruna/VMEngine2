@@ -14,8 +14,10 @@ public:
 
 	void Start(const char* WTitle, bool bFullscreen, int WWidth, int WHeight);
 
+	//get delta time precisly
 	double GetDeltaTime() { return DeltaTime; }
 
+	//get delta time less precisly
 	float GetFDeltaTime() { return static_cast<float>(DeltaTime); }
 
 private:
