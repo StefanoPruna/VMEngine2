@@ -1,6 +1,7 @@
 #pragma once
-#include "VMEngine/Graphics/GraphicsEngine.h"
-#include "CoreMinimal.h"
+#include "VMEngine/CoreMinimal.h"
+
+class Input;
 
 class Game
 {
@@ -19,6 +20,12 @@ public:
 
 	//get delta time less precisly
 	float GetFDeltaTime() { return static_cast<float>(DeltaTime); }
+
+	//return the graphic engine
+	GraphicsEnginePtr GetGraphicsEngine() { return Graphics; }
+
+	//set the bIsGameOver to true
+	void CloseApp() { bIsGameOver = true; }
 
 private:
 	Game();
@@ -43,15 +50,16 @@ private:
 
 	GraphicsEnginePtr Graphics;
 
-	//Load a default texture
-	/*TexturePtr DefaultTexture;*/
-
 	//time between frames, double is more precised than float
 	double DeltaTime;
+
+	//read the input of the player
+	Input* GameInput;
 
 	//temp mesh variables
 	MeshPtr Tri;
 	MeshPtr Poly;
 	MeshPtr Round;
 	MeshPtr Arrow;
+	MeshPtr Cube;
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include "VMEngine/CoreMinimal.h"
 #include "SDL2//SDL.h"
+#include "VMEngine/Math/Transformations.h"
 
 class GraphicsEngine
 {
@@ -31,6 +32,11 @@ public:
 	//avoid duplicates
 	TexturePtr CreateTexture(const char* FilePath);
 
+	//create the 3D space for the model to relate itself to screen and camera coordinates
+	void ApplyScreenTransformations(ShaderPtr Shader);
+
+	//var for the default camera
+	Vector3 EngineDefaultCam;
 private:
 	SDL_Window* SdlWindow;
 

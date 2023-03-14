@@ -3,6 +3,8 @@
 #include "VMEngine/Graphics/ShaderProgram.h"
 #include "VMEngine/Graphics/Texture.h"
 #include "VMEngine/Graphics/Mesh.h"
+#include <SDL2/SDL.h>
+#include "VMEngine/Input.h"
 
 Game& Game::GetGameInstance()
 {
@@ -49,30 +51,27 @@ void Game::Run()
 {
 	if (!bIsGameOver)
 	{
+		GameInput = new Input();
+
 		//create a shader
 		ShaderPtr TextureShader = Graphics->CreateShader({
 			L"Game/Shaders/TextureShader/TextureShader.svert",
 			L"Game/Shaders/TextureShader/TextureShader.sfrag"
 			});
 
-		Graphics->CreateTexture("Game/Textures/brick_pavement.jpg");
-
+		//Created the texture
 		TexturePtr TConcrete = Graphics->CreateTexture("Game/Textures/brick_pavement.jpg");
-		TexturePtr TGrid = Graphics->CreateTexture("Game/Textures/RectStones.jpg");
+		TexturePtr TGrid = Graphics->CreateTexture("Game/Textures/goldCoins.png");
 		TexturePtr TStones = Graphics->CreateTexture("Game/Textures/SquareStones.jpg");
 		TexturePtr TBricks = Graphics->CreateTexture("Game/Textures/SquareBrown.jpg");
 
-		//Create the vertex
-		Poly = Graphics->CreateSimpleMeshShape(GeometricShapes::Polygon, TextureShader, { TConcrete });
-		Tri = Graphics->CreateSimpleMeshShape(GeometricShapes::Triangle, TextureShader, { TGrid });
-		//Graphics->CreateSimpleMeshShape(GeometricShapes::Circle);
-		//Graphics->CreateSimpleMeshShape(GeometricShapes::Arrow);
+		//Create the vertex/meshes
+		Poly = Graphics->CreateSimpleMeshShape(GeometricShapes::Cube, TextureShader, { TConcrete });
+		Cube = Graphics->CreateSimpleMeshShape(GeometricShapes::Polygon, TextureShader, { TGrid });
 
-		Poly->Transform.Location.x = 0.5f;
-		Tri->Transform.Location.x = -0.5f;
-		Poly->Transform.Scale = Vector3(0.5f);
-		Tri->Transform.Scale = Vector3(0.7f);
-		Poly->Transform.Rotation.z = 45.0f;
+		//created transformation for the meshes
+		Poly->Transform.Location.x = -0.5f;	
+		Cube->Transform.Location.x = 1.0f;
 	}
 
 	while (!bIsGameOver)
@@ -89,20 +88,8 @@ void Game::Run()
 
 void Game::ProcessInput()
 {
-	SDL_Event PollEvent;
-
-	//Using ampisand
-	while (SDL_PollEvent(&PollEvent))
-	{
-		switch (PollEvent.type)
-		{
-		case SDL_QUIT:
-			bIsGameOver = true;
-			break;
-		default:
-			break;
-		}
-	}
+	//run the input detection for our game input
+	GameInput->ProcessInput();
 }
 
 void Game::Update()
@@ -119,16 +106,37 @@ void Game::Update()
 	LastFrameTime = CurrentFrameTime;
 
 	Poly->Transform.Rotation.z += 25.0f * GetFDeltaTime();
+	Poly->Transform.Rotation.x += 25.0f * GetFDeltaTime();
+	Poly->Transform.Rotation.y += 25.0f * GetFDeltaTime();
 
-	static int MoveUp = 1.0f;
+	Cube->Transform.Rotation.z += -25.0f * GetFDeltaTime();
+	Cube->Transform.Rotation.x += -25.0f * GetFDeltaTime();
+	Cube->Transform.Rotation.y += -25.0f * GetFDeltaTime();
 
-	if (Tri->Transform.Location.y > 0.5f)
-		MoveUp = -1.0f;
+	Vector3 CameraInput = Vector3(0.0f);
 
-	if (Tri->Transform.Location.y < -0.5f)
-		MoveUp = 1.0f;
+	//move camera forward
+	if (GameInput->IsKeyDown(SDL_SCANCODE_W))
+		CameraInput.z = 1.0f;
+	//move camera backward
+	if (GameInput->IsKeyDown(SDL_SCANCODE_S))
+		CameraInput.z = -1.0f;
+	//move camera left
+	if (GameInput->IsKeyDown(SDL_SCANCODE_A))
+		CameraInput.x = 1.0f;
+	//move camera right
+	if (GameInput->IsKeyDown(SDL_SCANCODE_D))
+		CameraInput.x = -1.0f;
+	//move camera up
+	if (GameInput->IsKeyDown(SDL_SCANCODE_Q))
+		CameraInput.y = -1.0f;
+	//move camera down
+	if (GameInput->IsKeyDown(SDL_SCANCODE_E))
+		CameraInput.y = 1.0f;
 
-	Tri->Transform.Location.y += (0.9f * MoveUp) * GetFDeltaTime();
+	CameraInput *= 2.0f * GetFDeltaTime();
+
+	Graphics->EngineDefaultCam += CameraInput;
 }
 
 void Game::Draw()
@@ -138,5 +146,5 @@ void Game::Draw()
 
 void Game::CloseGame()
 {
-	//TO DO end the game
+	delete GameInput;
 }

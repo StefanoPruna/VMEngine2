@@ -3,6 +3,8 @@
 #include "VMEngine/Graphics/Texture.h"
 #include "VMEngine/Graphics/VertexArrayObject.h"
 #include "glm/gtc/matrix_transform.hpp"
+#include "VMEngine/Game.h"
+#include "VMEngine/Graphics/GraphicsEngine.h"
 
 Mesh::Mesh()
 {
@@ -78,8 +80,10 @@ void Mesh::Draw()
 		MatTransform = glm::scale(MatTransform, Transform.Scale);
 
 		//update the shader with the new transforms
-		MeshShader->SetMat4("transform", MatTransform);
+		MeshShader->SetMat4("model", MatTransform);
 	}		
+
+	Game::GetGameInstance().GetGraphicsEngine()->ApplyScreenTransformations(MeshShader);
 
 	//draw the VAO
 	MeshVAO->Draw();

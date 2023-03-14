@@ -141,6 +141,7 @@
     <ClInclude Include="includes\VMEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="includes\VMEngine\Graphics\Texture.h" />
     <ClInclude Include="includes\VMEngine\Graphics\VertexArrayObject.h" />
+    <ClInclude Include="includes\VMEngine\Input.h" />
     <ClInclude Include="includes\VMEngine\Math\Transformations.h" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +153,7 @@
     <ClCompile Include="source\VMEngine\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="source\VMEngine\Graphics\Texture.cpp" />
     <ClCompile Include="source\VMEngine\Graphics\VertexArrayObject.cpp" />
+    <ClCompile Include="source\VMEngine\Input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Game\Shaders\TextureShader\TextureShader.sfrag" />
